@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AppraisalForm</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <h1>Performance Appraisal Form</h1>
+        <form [formGroup]="appraisalForm" (ngSubmit)="onSubmit()">
+            <div formGroupName="employeeInformation">
+              <h2>Employee Information</h2>
+              <label>Name</label>
+              <input formControlName="employeeName" type="text">
+              <label>Job Title</label>
+              <input formControlName="jobTitle" type="text">
+              <label>Department</label>
+              <input formControlName="department" type="text">
+              <label>Date of Review</label>
+              <input formControlName="reviewDate" type="date">
+              <label>Reviewer</label>
+              <input formControlName="reviewer" type="text">
+            </div>
+          
+            <div formArrayName="goals">
+              <h2>Goals</h2>
+              <div *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i">
+                <h3>Goal {{i + 1}}</h3>
+                <label>Description</label>
+                <input formControlName="description" type="text">
+                <label>Measurement</label>
+                <input formControlName="measurement" type="text">
+                <label>Achievement</label>
+                <input formControlName="achievement" type="text">
+                <label>Comments</label>
+                <textarea formControlName="comments"></textarea>
+              </div>
+              <button type="button" (click)="addGoal()">Add Another Goal</button>
+            </div>
+          
+            <div formArrayName="competencies">
+              <h2>Competencies</h2>
+              <div *ngFor="let competency of competencies.controls; let i = index" [formGroupName]="i">
+                <label>Category</label>
+                <input formControlName="category" type="text">
+                <label>Rating</label>
+                <select formControlName="rating">
+                  <option *ngFor="let rating of ratings" [value]="rating.value">{{rating.viewValue}}</option>
+                </select>
+                <label>Comments</label>
+                <textarea formControlName="comments"></textarea>
+              </div>
+              <button type="button" (click)="addCompetency()">Add Another Competency</button>
+            </div>
+          
+            <div formGroupName="feedback">
+              <h2>Feedback</h2>
+              <label>Peers</label>
+              <textarea formControlName="peers"></textarea>
+              <label>Subordinates</label>
+              <textarea formControlName="subordinates"></textarea>
+              <label>Self</label>
+              <textarea formControlName="self"></textarea>
+            </div>
+          
+            <div formGroupName="overallPerformance">
+              <h2>Overall Performance Rating</h2>
+              <label>Rating</label>
+              <select formControlName="rating">
+                <option *ngFor="let rating of ratings" [value]="rating.value">{{rating.viewValue}}</option>
+              </select>
+              <label>Comments</label>
+              <textarea formControlName="comments"></textarea>
+            </div>
+          
+            <div formGroupName="developmentNeeds">
+              <h2>Development and Training Needs</h2>
+              <label>Strengths</label>
+              <textarea formControlName="strengths"></textarea>
+              <label>Areas for Improvement</label>
+              <textarea formControlName="improvement"></textarea>
+              <label>Training Needs</label>
+              <textarea formControlName="training"></textarea>
+              <label>Development Plan</label>
+              <textarea formControlName="plan"></textarea>
+            </div>
+          
+            <div formArrayName="futureGoals">
+              <h2>Future Goals and Objectives</h2>
+              <div *ngFor="let goal of futureGoals.controls; let i = index" [formGroupName]="i">
+                <h3>Goal {{i + 1}}</h3>
+                <label>Description</label>
+                <input formControlName="description" type="text">
+                <label>Measurement</label>
+                <input formControlName="measurement" type="text">
+              </div>
+              <button type="button" (click)="addFutureGoal()">Add Another Future Goal</button>
+            </div>
+          
+            <div formGroupName="commentsSignatures">
+              <h2>Comments and Signatures</h2>
+              <label>Employee’s Comments</label>
+              <textarea formControlName="employeeComments"></textarea>
+              <label>Employee’s Signature</label>
+              <input formControlName="employeeSignature" type="text">
+              <label>Reviewer’s Signature</label>
+              <input formControlName="reviewerSignature" type="text">
+            </div>
+          
+            <button type="submit">Submit</button>
+          </form>
+      </div>
+       
+</body>
+</html>
